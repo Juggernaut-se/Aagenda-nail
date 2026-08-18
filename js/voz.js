@@ -1,0 +1,7 @@
+const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;let reconhecimento=null;
+if(SpeechRecognition){reconhecimento=new SpeechRecognition();reconhecimento.lang="pt-BR";reconhecimento.continuous=false;reconhecimento.interimResults=false;reconhecimento.onresult=e=>interpretarComando(e.results[0][0].transcript);reconhecimento.onend=()=>atualizarBotaoVoz(false)}
+function iniciarVoz(){if(!reconhecimento){alert("Seu navegador não oferece reconhecimento de voz.");return}reconhecimento.start();atualizarBotaoVoz(true)}
+function atualizarBotaoVoz(o){const b=document.getElementById("btnVoz");b.textContent=o?"🔴":"🎙️"}
+function interpretarComando(texto){const comando=normalizarTexto(texto),c=clientes.find(x=>comando.includes(normalizarTexto(x.nome)));if(!c){alert("Não encontrei essa cliente cadastrada.");return}let data=obterDataComando(comando)||formatarData(new Date()),horario=obterHorarioComando(comando);abrirAgendamentoComDados(c,data,horario)}
+function obterDataComando(t){const h=new Date();if(t.includes("depois de amanha")){h.setDate(h.getDate()+2);return formatarData(h)}if(t.includes("amanha")){h.setDate(h.getDate()+1);return formatarData(h)}if(t.includes("hoje"))return formatarData(h);return null}
+function obterHorarioComando(t){const r=t.match(/(?:as|a)\s+(\d{1,2})(?:[:h](\d{2}))?\s*(da tarde|da noite|da manha)?/);if(!r)return null;let h=Number(r[1]),m=Number(r[2]||0),p=r[3]||"";if((p.includes("tarde")||p.includes("noite"))&&h<12)h+=12;return String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")}
