@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111827">
+<meta name="description" content="Agenda simples para profissionais de manicure">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+<title>Agenda Nail</title>
+</head>
+<body>
+<header class="topo"><div><span class="marca">Agenda Nail</span><h1 id="dataAtual">Hoje</h1></div><button id="btnVoz" class="btn-voz">🎙️</button></header>
+<main>
+<section id="secaoAtencao" class="card atencao oculto"><h2>♡ Atenção</h2><div id="listaAtencao"></div></section>
+<section class="resumo"><div class="resumo-card"><strong id="totalHoje">0</strong><span>atendimentos hoje</span></div><button id="btnNovoAgendamento" class="btn-principal">+ Agendar</button></section>
+<section class="card"><div class="titulo-secao"><div><span class="pequeno">AGENDA</span><h2>Atendimentos</h2></div></div><div id="listaHoje" class="lista"></div></section>
+<section class="card"><span class="pequeno">HORÁRIOS LIVRES</span><h2>Disponibilidade</h2><div id="listaHorarios" class="lista-horarios"></div></section>
+<section class="card"><div class="titulo-secao"><div><span class="pequeno">CLIENTES</span><h2>Minhas clientes</h2></div><button id="btnNovaCliente" class="btn-secundario">+ Nova</button></div><input id="buscarCliente" class="campo busca" placeholder="🔎 Buscar cliente..."><div id="listaClientes" class="lista"></div></section>
+</main>
+
+<div id="modalCliente" class="modal oculto"><div class="modal-conteudo">
+<div class="modal-topo"><h2 id="tituloModalCliente">Nova cliente</h2><button class="fechar" onclick="fecharModalCliente()">×</button></div>
+<form id="formCliente">
+<input type="hidden" id="clienteId">
+<label>Nome *</label><input id="clienteNome" class="campo" required>
+<label>Telefone</label><input id="clienteTelefone" class="campo" type="tel">
+<label>Data de nascimento</label><input id="clienteNascimento" class="campo" type="date">
+<label>Serviço habitual</label><input id="clienteServico" class="campo">
+<label>Duração</label><select id="clienteDuracao" class="campo"><option value="30">30 minutos</option><option value="60" selected>60 minutos</option><option value="90">90 minutos</option><option value="120">120 minutos</option></select>
+<label>Cliente recorrente?</label><select id="clienteRecorrente" class="campo"><option value="nao">Não</option><option value="sim">Sim</option></select>
+<div id="campoFrequencia" class="oculto"><label>Retorna a cada</label><select id="clienteFrequencia" class="campo"><option value="8">8 dias</option><option value="15" selected>15 dias</option><option value="30">30 dias</option><option value="45">45 dias</option><option value="60">60 dias</option></select></div>
+<button class="btn-principal" type="submit">Salvar cliente</button>
+</form></div></div>
+
+<div id="modalAgendamento" class="modal oculto"><div class="modal-conteudo">
+<div class="modal-topo"><h2>Novo agendamento</h2><button class="fechar" onclick="fecharModalAgendamento()">×</button></div>
+<form id="formAgendamento">
+<label>Cliente</label><select id="agendamentoCliente" class="campo" required></select>
+<label>Data</label><input id="agendamentoData" class="campo" type="date" required>
+<label>Horário</label><select id="agendamentoHorario" class="campo" required></select>
+<label>Serviço</label><input id="agendamentoServico" class="campo">
+<button class="btn-principal" type="submit">Confirmar agendamento</button>
+</form></div></div>
+
+<script src="js/db.js"></script><script src="js/clientes.js"></script><script src="js/agenda.js"></script><script src="js/voz.js"></script><script src="js/app.js"></script>
+</body></html>
